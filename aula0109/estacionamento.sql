@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Set-2025 às 14:07
--- Versão do servidor: 10.4.28-MariaDB
--- versão do PHP: 8.2.4
+-- Tempo de geração: 10-Set-2025 às 21:41
+-- Versão do servidor: 10.4.32-MariaDB
+-- versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,18 +53,20 @@ INSERT INTO `andar` (`codLugar`, `capacidade`, `nome_andar`) VALUES
 CREATE TABLE `cliente` (
   `cpf` varchar(20) NOT NULL,
   `dtnasc` datetime NOT NULL,
-  `nome` varchar(100) NOT NULL
+  `nome` varchar(100) NOT NULL,
+  `endereco` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `cliente`
 --
 
-INSERT INTO `cliente` (`cpf`, `dtnasc`, `nome`) VALUES
-('32165498700', '1995-01-12 00:00:00', 'Marcos Lima'),
-('45678912345', '1975-06-30 00:00:00', 'Carlos Souza'),
-('78912345678', '1982-11-05 00:00:00', 'Ana Paula'),
-('98765432100', '1990-10-20 00:00:00', 'Maria Oliveira');
+INSERT INTO `cliente` (`cpf`, `dtnasc`, `nome`, `endereco`) VALUES
+('12345678901', '1985-04-15 00:00:00', 'João Silva', 'Rua das Flores, 123, São Paulo, SP, 01001-000'),
+('32165498700', '1995-01-12 00:00:00', 'Marcos Lima', 'Avenida Brasil, 456, Rio de Janeiro, RJ, 20010-000'),
+('45678912345', '1975-06-30 00:00:00', 'Carlos Souza', 'Rua das Palmeira, 45, Belo Horizonte, MG, 30120-000'),
+('78912345678', '1982-11-05 00:00:00', 'Ana Paula', 'Avenida Central, 55, Porto Alegre, RS, 90020-000'),
+('98765432100', '1990-10-20 00:00:00', 'Maria Oliveira', 'Rua do Sol, 910, Curitiba, PR, 80010-000');
 
 -- --------------------------------------------------------
 
@@ -87,6 +89,7 @@ CREATE TABLE `estaciona` (
 --
 
 INSERT INTO `estaciona` (`cod`, `horSaida`, `dtEntrada`, `horEntrada`, `dtSaida`, `placa`, `codLugar`) VALUES
+(1, '2025-09-01 10:00:00', '2025-09-01 00:00:00', '0000-00-00 00:00:00', '2025-09-01 00:00:00', 'ABC1234', 1),
 (2, '2025-09-02 15:30:00', '2025-09-02 00:00:00', '0000-00-00 00:00:00', '2025-09-02 00:00:00', 'DEF5678', 2),
 (3, '2025-09-03 18:45:00', '2025-09-03 00:00:00', '0000-00-00 00:00:00', '2025-09-03 00:00:00', 'GHI9012', 3),
 (4, '2025-09-04 09:20:00', '2025-09-04 00:00:00', '0000-00-00 00:00:00', '2025-09-04 00:00:00', 'JKL3456', 1),
@@ -111,7 +114,7 @@ INSERT INTO `modelo` (`codModelo`, `modelo`) VALUES
 (1, 'Sedan'),
 (2, 'SUV'),
 (3, 'Hatch'),
-(4, 'FIAT'),
+(4, 'Caminhão'),
 (5, 'Moto');
 
 -- --------------------------------------------------------
@@ -124,18 +127,20 @@ CREATE TABLE `veiculo` (
   `placa` varchar(7) NOT NULL,
   `cor` varchar(20) NOT NULL,
   `cpf` varchar(20) NOT NULL,
-  `codModelo` int(11) NOT NULL
+  `codModelo` int(11) NOT NULL,
+  `ano` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `veiculo`
 --
 
-INSERT INTO `veiculo` (`placa`, `cor`, `cpf`, `codModelo`) VALUES
-('DEF5678', 'Branco', '98765432100', 2),
-('GHI9012', 'Vermelho', '45678912345', 3),
-('JKL3456', 'Azul', '78912345678', 1),
-('MNO7890', 'rosa', '32165498700', 4);
+INSERT INTO `veiculo` (`placa`, `cor`, `cpf`, `codModelo`, `ano`) VALUES
+('ABC1234', 'Preto', '12345678901', 1, 1997),
+('DEF5678', 'Branco', '98765432100', 2, 2015),
+('GHI9012', 'Vermelho', '45678912345', 3, 1998),
+('JKL3456', 'Azul', '78912345678', 1, 2000),
+('MNO7890', 'Cinza', '32165498700', 4, 2018);
 
 --
 -- Índices para tabelas despejadas
